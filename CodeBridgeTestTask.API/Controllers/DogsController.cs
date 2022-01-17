@@ -57,7 +57,7 @@ namespace CodeBridgeTestTask.API.Controllers
             if (!ModelState.IsValid)            
                 return BadRequest();
             if (await _repository.IsExists(item.Name))
-                return Conflict();
+                return Conflict(new { error = "The name is already in use" });
             
             await _repository.AddDogAsync(item);
             await _repository.SaveChangesAsync();
