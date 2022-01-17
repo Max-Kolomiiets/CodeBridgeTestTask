@@ -19,7 +19,14 @@ namespace CodeBridgeTestTask.Infrastructure.Data.Repositories
         public async Task AddDogAsync(Dog dog)
         {
             if (dog != null)
+            {
                 await _ctx.Dogs.AddAsync(dog);
+            }
+        }
+
+        public async Task<bool> IsExists(string name)
+        {
+            return await _ctx.Dogs.AnyAsync(p => p.Name == name);
         }
 
         public async Task<Dog> GetDogAsync(int id)

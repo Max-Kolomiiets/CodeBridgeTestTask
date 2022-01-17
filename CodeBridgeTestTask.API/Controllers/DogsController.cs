@@ -45,17 +45,20 @@ namespace CodeBridgeTestTask.API.Controllers
         /// </remarks>
         /// <returns>A newly created TodoItem</returns>
         /// <response code="201">Returns the newly created item</response>
-        /// <response code="400">If the item is null</response>            
+        /// <response code="400">If the item is null</response> 
+        /// <response code="409">If the item.name already exists</response>            
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [Route("/dog")]
         public async Task<IActionResult> CreateAsync(Dog item)
         {
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)            
                 return BadRequest();
-            }
+            if (await _repository.IsExists(item.Name))
+                return Conflict();
+            
             await _repository.AddDogAsync(item);
             await _repository.SaveChangesAsync();
             return Created("/dogs", item);

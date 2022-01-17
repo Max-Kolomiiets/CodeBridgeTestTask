@@ -13,6 +13,7 @@ namespace CodeBridgeTestTask.Infrastructure.Data.Repositories
         Task<IList<Dog>> GetDogsAsync(SortingParams sortingParams, PagingParams pagingParams);
         Task<Dog> GetDogAsync(int id);
         Task AddDogAsync(Dog dog);
+        Task<bool> IsExists(string name);
         Task<int> SaveChangesAsync();
     }
 }
