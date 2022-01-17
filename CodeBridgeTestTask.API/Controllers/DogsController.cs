@@ -22,6 +22,11 @@ namespace CodeBridgeTestTask.API.Controllers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Get Dogs
+        /// </summary>
+        /// <returns>dogs list json</returns>
+        /// <response code="429">Too many incoming requests</response>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] SortingParams sortingParams, [FromQuery] PagingParams pagingParams)
         {

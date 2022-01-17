@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using CodeBridgeTestTask.Infrastructure.Data;
 using CodeBridgeTestTask.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -43,11 +44,19 @@ namespace CodeBridgeTestTask.API
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+            #region Rate Limit
+            services.AddOptions();
+            services.AddMemoryCache();
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            services.AddInMemoryRateLimiting();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseIpRateLimiting();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
