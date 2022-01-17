@@ -3,6 +3,7 @@ using CodeBridgeTestTask.DAL.Helpers;
 using CodeBridgeTestTask.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,23 @@ namespace CodeBridgeTestTask.API.Controllers
         /// <summary>
         /// Get Dogs
         /// </summary>
-        /// <returns>dogs list json</returns>
+        /// <returns>Dogs List json</returns>
         /// <response code="429">Too many incoming requests</response>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] SortingParams sortingParams, [FromQuery] PagingParams pagingParams)
         {
-            return Ok(await _repository.GetDogsAsync(sortingParams, pagingParams));
+            var dogs = await _repository.GetDogsAsync(sortingParams, pagingParams);
+            var metadata = new
+            {
+                dogs.TotalCount,
+                dogs.PageSize,
+                dogs.CurrentPage,
+                dogs.TotalPages,
+                dogs.HasNext,
+                dogs.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            return Ok(dogs);
         }
 
         /// <summary>

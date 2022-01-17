@@ -10,7 +10,7 @@ namespace CodeBridgeTestTask.Infrastructure.Data.Repositories
 {
     public interface IDogsRepository
     {
-        Task<IList<Dog>> GetDogsAsync(SortingParams sortingParams, PagingParams pagingParams);
+        Task<PagedList<Dog>> GetDogsAsync(SortingParams sortingParams, PagingParams pagingParams);
         Task<Dog> GetDogAsync(int id);
         Task AddDogAsync(Dog dog);
         Task<bool> IsExists(string name);

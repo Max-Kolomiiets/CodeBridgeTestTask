@@ -34,18 +34,14 @@ namespace CodeBridgeTestTask.Infrastructure.Data.Repositories
             return await _ctx.Dogs.FindAsync(id);
         }
 
-        public async Task<IList<Dog>> GetDogsAsync(SortingParams sortingParams, PagingParams pagingParams)
+        public async Task<PagedList<Dog>> GetDogsAsync(SortingParams sortingParams, PagingParams pagingParams)
         {
             IQueryable<Dog> dogs = _ctx.Dogs;
 
             if (sortingParams?.Attribute != null)
-            {
                 dogs = sortBy(dogs, sortingParams.Attribute, sortingParams.Order);
-            }
 
-            var li = await PagedList<Dog>.ToPagedList(dogs, pagingParams.PageNumber, pagingParams?.PageSize);
-
-            return li;
+            return await PagedList<Dog>.ToPagedList(dogs, pagingParams.PageNumber, pagingParams?.PageSize);
         }
 
         public async Task<int> SaveChangesAsync()
