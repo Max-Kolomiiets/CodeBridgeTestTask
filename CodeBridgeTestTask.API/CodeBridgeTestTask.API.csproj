@@ -12,4 +12,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CodeBridgeTestTask.Infrastructure\CodeBridgeTestTask.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
