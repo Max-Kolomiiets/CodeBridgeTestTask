@@ -4,12 +4,7 @@ using CodeBridgeTestTask.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CodeBridgeTestTask.API.Controllers
 {
@@ -60,10 +55,10 @@ namespace CodeBridgeTestTask.API.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <returns>A newly created TodoItem</returns>
+        /// <returns>A newly created Dog</returns>
         /// <response code="201">Returns the newly created item</response>
         /// <response code="400">If the item is null</response> 
-        /// <response code="409">If the item.name already exists</response>            
+        /// <response code="409">If item with the same name already exists</response>            
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,10 +1,7 @@
 ﻿using CodeBridgeTestTask.Core.Entities;
 using CodeBridgeTestTask.DAL.Helpers;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeBridgeTestTask.Infrastructure.Data.Repositories
