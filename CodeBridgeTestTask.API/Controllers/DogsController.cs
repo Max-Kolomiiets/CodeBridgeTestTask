@@ -36,7 +36,8 @@ namespace CodeBridgeTestTask.API.Controllers
                 dogs.HasNext,
                 dogs.HasPrevious
             };
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            if (Response != null)
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return Ok(dogs);
         }
 
