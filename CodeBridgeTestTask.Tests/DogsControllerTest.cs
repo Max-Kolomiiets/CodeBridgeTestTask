@@ -5,7 +5,7 @@ using CodeBridgeTestTask.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 using System.Linq;
 using Xunit;
 
