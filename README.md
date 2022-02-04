@@ -1,4 +1,4 @@
 # CodeBridgeTestTask
 ### Test Web API for CodeBridge Company
-### *Technologies: ASP Net Core Web API*
+### *Technologies: ASP Net 5 Web API*
 
